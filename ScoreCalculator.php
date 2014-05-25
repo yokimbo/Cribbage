@@ -78,6 +78,7 @@ function count_runs($fcards) {
     }
     # If the cards are the same, increase multiplier
     else if ($fcards[$i] == $fcards[$i-1]) {
+      # If we have a double-double (ex., 7, 7, 8, 8, 9) then increase the multiplier again
       if ( ($fcards[$i] != $last_repeat) && ($last_repeat != 0) ) {
         $multiplier++;
       }
@@ -105,6 +106,7 @@ function count_runs($fcards) {
     return $points;
   }
   else {
+    echo "No runs" . PHP_EOL;
     return $points;
   }
 }
@@ -122,6 +124,12 @@ function print_score($score) {
 ## Main
 ##
 ################################
+
+print_hand("(4, 4, 4, 7, 10)");
+$cards = array(4, 4, 4, 7, 10);
+$points = count_runs($cards);
+$points += count_fifteens_pairs($cards);
+print_score($points);
 
 print_hand("(1, 1, 6, 7, 8)");
 $cards = array(1, 1, 6, 7, 8);
